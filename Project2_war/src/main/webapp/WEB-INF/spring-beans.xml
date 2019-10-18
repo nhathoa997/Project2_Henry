@@ -11,9 +11,9 @@
     <!--    Spring Beans can be found through annotation configuration-->
     <!--    By enabling component scan, spring will automagically-->
     <!--    Resolve dependencies-->
-    <context:component-scan base-package="com.ex"/>
+    <context:component-scan base-package="com.ex.yummy"/>
 
-    <mvc:resources mapping="/**" location="/"/>
+<!--    <mvc:resources mapping="/**" location="/"/>-->
 
 <!--    <import resource="orm-beans.xml"/>-->
 

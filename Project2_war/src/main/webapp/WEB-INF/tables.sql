@@ -2,10 +2,8 @@ create table if not exists Users(
     id serial primary key,
     user_name varchar(100) not null,
     email varchar(40) not null unique,
---     first_name varchar(30) not null,
---     last_name varchar(30) not null,
     password char(40) not null,
-    zip_code int not null;
+    zip_code int not null
 );
 
 create table if not exists Users_Preferences (
