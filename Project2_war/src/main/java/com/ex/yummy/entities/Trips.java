@@ -16,6 +16,13 @@ import javax.persistence.*;
 @Table
 
 public class Trips {
+    public Trips(String restaurantName, double longitude, double latitude, int tripRating) {
+        this.restaurantName = restaurantName;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.tripRating = tripRating;
+    }
+
     @Id
     @Column(name="trip_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,4 +4,5 @@ import org.springframework.stereotype.Service;
 
 @Service("authentication")
 public class Authentication {
+
 }

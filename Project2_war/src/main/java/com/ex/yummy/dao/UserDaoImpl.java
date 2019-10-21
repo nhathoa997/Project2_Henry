@@ -1,28 +1,71 @@
 package com.ex.yummy.dao;
 
 import com.ex.yummy.entities.Users;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
+import java.awt.print.Book;
+import java.sql.*;
+
+
+@Configuration
 @Repository
 @Transactional
 public class UserDaoImpl implements UserDao {
 
-    private SessionFactory sessionFactory;
+    public UserDaoImpl() {
+        System.out.println("Creating UserDao Bean");
+    }
+
+    private static SessionFactory sessionFactory;
+    @Autowired
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
     @Autowired
     public void setSessionFactory(SessionFactory sessionFactory){
         this.sessionFactory = sessionFactory;
+    }
+
+    @Transactional
+    public void saveUserInfo(Users new_user){
+        Session session = sessionFactory.getCurrentSession();
+        session.persist(new_user);
     }
 
 
     @Override
     @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ,
     propagation = Propagation.REQUIRES_NEW)
-    public Users getById(int id) {
+    public Users getById(int id) throws SQLException {
+
+        Users new_user = null;
+        String sql = "SELECT * FROM Users WHERE id = " + id;
+//        java.sql.Connection conn = DriverManager.getConnection("jdbc:postgresql://henrydinh.cdrs9lfdhqu1.us-east-2.rds." +
+//                "amazonaws.com:5432/henrydb?user=henry_dinh&password=Henry8354392.");
+//
+//        Statement statement = conn.createStatement();
+//        statement.execute(sql);
+//        Statement statement = Connection.createStatement();
+//        ResultSet resultSet = statement.executeQuery(sql);
+
+
+
         return null;
     }
 
@@ -30,8 +73,10 @@ public class UserDaoImpl implements UserDao {
     @Transactional(readOnly=true, isolation= Isolation.REPEATABLE_READ,
             propagation= Propagation.REQUIRES_NEW)
     public Users getByUserName(String userName) {
+
         return null;
     }
+
 
     @Override
     @Transactional(readOnly=true, isolation= Isolation.REPEATABLE_READ,

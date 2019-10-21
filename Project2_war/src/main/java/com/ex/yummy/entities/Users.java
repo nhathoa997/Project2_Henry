@@ -18,9 +18,22 @@ import java.util.ArrayList;
 
 
 public class Users {
+    public Users(String userName, String email, String password, int zipCode, ArrayList<Trips> trips) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.zipCode = zipCode;
+        this.trips = trips;
+    }
+    public Users(String userName, String password){
+        this.userName = userName;
+        this.password = password;
+    }
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
 
     private int id;
     @Column(name="user_name")
