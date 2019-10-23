@@ -1,8 +1,10 @@
 package com.ex.yummy.dao;
 
 import com.ex.yummy.entities.Users;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Repository;
@@ -22,10 +24,10 @@ import java.awt.print.Book;
 import java.sql.*;
 
 
-@Configuration
-@Repository
-@Transactional
+
+@Repository("user_dao")
 public class UserDaoImpl implements UserDao {
+
 
     public UserDaoImpl() {
         System.out.println("Creating UserDao Bean");
@@ -63,9 +65,6 @@ public class UserDaoImpl implements UserDao {
 //        statement.execute(sql);
 //        Statement statement = Connection.createStatement();
 //        ResultSet resultSet = statement.executeQuery(sql);
-
-
-
         return null;
     }
 
@@ -74,7 +73,16 @@ public class UserDaoImpl implements UserDao {
             propagation= Propagation.REQUIRES_NEW)
     public Users getByUserName(String userName) {
 
-        return null;
+        Session session = this.sessionFactory.openSession();
+
+        String hql = "From Users where userName = :x";
+
+
+        Query q = session.createQuery(hql);
+        q.setString("x",userName);
+        Users user = (Users)q.list().get(0);
+        session.close();
+        return user;
     }
 
 
@@ -82,6 +90,15 @@ public class UserDaoImpl implements UserDao {
     @Transactional(readOnly=true, isolation= Isolation.REPEATABLE_READ,
             propagation= Propagation.REQUIRES_NEW)
     public Users getByEmail(String email) {
-        return null;
+        Session session = this.sessionFactory.openSession();
+
+        String hql = "From Users where email = :x";
+
+
+        Query q = session.createQuery(hql);
+        q.setString("x",email);
+        Users user = (Users)q.list().get(0);
+        session.close();
+        return user;
     }
 }

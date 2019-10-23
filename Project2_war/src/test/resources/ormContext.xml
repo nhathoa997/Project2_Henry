@@ -5,7 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <tx:annotation-driven/>
-    <context:component-scan base-package="com.ex.yummy"/>
+<!--    <context:component-scan base-package="com.ex.yummy"/>-->
 
     <!--    config our orm-->
     <!--    To configure hibernate we will need at least 2 beans (datasource and sessionfactory)-->
@@ -16,7 +16,6 @@
         <property name="password" value="Henry8354392."/>
         <property name="driverClassName" value="org.postgresql.Driver"/>
     </bean>
-
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
