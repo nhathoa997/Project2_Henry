@@ -18,12 +18,15 @@ public class Doop {
     @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String item, link;
+//    private String item, link;
+//    private String link ;
+    private String name;
     private int mexican=0, chinese=0, japanese=0, thai=0, greek=0, indian=0, caribbean=0, italian=0, german=0, korean=0, american=0, deli=0, vietnamese=0, breakfast=0, soulFood=0, bakery=0;
 
 
     public int doopSpit() {
-        int arr[] = {this.mexican,
+        int arr[] = {
+                this.mexican,
                 this.chinese,
                 this.japanese,
                 this.thai,
@@ -54,22 +57,29 @@ public class Doop {
         }
         return -1;
     }
-
-    public String getItem() {
-        return item;
+    public String getName() {
+        return name;
     }
 
-    public void setItem(String item) {
-        this.item = item;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLink() {
-        return link;
-    }
+//    public String getItem() {
+//        return item;
+//    }
 
-    public void setLink(String link) {
-        this.link = link;
-    }
+//    public void setItem(String item) {
+//        this.item = item;
+//    }
+
+//    public String getLink() {
+//        return link;
+//    }
+//
+//    public void setLink(String link) {
+//        this.link = link;
+//    }
 
     public int getMexican() {
         return mexican;

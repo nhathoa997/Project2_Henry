@@ -5,6 +5,7 @@ import com.ex.yummy.entities.Doop;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,19 +20,30 @@ public class FunSearchOne {
     private int sauces = 12;
     private int sides = 17;
     private FunSearchDao dao;
+    private ArrayList<Integer> temp;
+
+    @Autowired
+    public FunSearchOne(FunSearchDao fun_dao) {
+        this.dao = fun_dao;
+    }
 
     public ArrayList<Doop> prepareRoundOne() {
         ArrayList<Doop> setup = new ArrayList<>();
-        int[] temp = getFourRando(sauces);
-        setup.add(dao.getDoop(temp[0]));
-        setup.add(dao.getDoop(temp[1]));
-        setup.add(dao.getDoop(temp[2]));
-        setup.add(dao.getDoop(temp[3])); // get four random sauces
+        temp = getFourRando(sauces);
+        System.out.println(temp.get(0));
+        System.out.println(temp.get(1));
+        System.out.println(temp.get(2));
+        System.out.println(temp.get(3));
+        setup.add(dao.getDoop(temp.get(0)));
+        setup.add(dao.getDoop(temp.get(1)));
+        setup.add(dao.getDoop(temp.get(2)));
+        setup.add(dao.getDoop(temp.get(3))); // get four random sauces
+
         temp = getFourRando(sides);
-        setup.add(dao.getDoop(temp[0] + sauces));
-        setup.add(dao.getDoop(temp[1] + sauces));
-        setup.add(dao.getDoop(temp[2] + sauces));
-        setup.add(dao.getDoop(temp[3] + sauces)); //get four random sides
+        setup.add(dao.getDoop(temp.get(0) + sauces));
+        setup.add(dao.getDoop(temp.get(1) + sauces));
+        setup.add(dao.getDoop(temp.get(2) + sauces));
+        setup.add(dao.getDoop(temp.get(3) + sauces)); //get four random sides
 
         return setup;
     }
@@ -44,22 +56,32 @@ public class FunSearchOne {
         return setup;
     }
 
-    public int[] getFourRando(int max) {
-//        int a, b, c , d;
-//        Random r = new Random();
-//        a = r.nextInt(max);
-//        do {
-//            b = r.nextInt(max);
-//        } while (a == b);
-//        do {
-//            c = r.nextInt(max);
-//        } while ((a == c) | (b == c));
-//        do {
-//            d = r.nextInt(max);
-//        } while ((a == d) | (b == d) | (c == d));
+    public ArrayList<Integer> getFourRando(int max) {
+        temp = new ArrayList<>();
+        int a, b, c , d;
+        int min = 1;
+        Random r = new Random();
+//        double randomDouble = Math.random();
+//        randomDouble = randomDouble * 93 + 1;
+//        int randomInt = (int) randomDouble;
+        a = r.nextInt((max - min) + 1) + min;
+        do {
+            b = r.nextInt((max - min) + 1) + min;;
+        } while (a == b);
+        do {
+            c = r.nextInt((max - min) + 1) + min;
+        } while ((a == c) | (b == c));
+        do {
+            d = r.nextInt((max - min) + 1) + min;;
+        } while ((a == d) | (b == d) | (c == d));
+        temp.add(a);
+        temp.add(b);
+        temp.add(c);
+        temp.add(d);
+        return temp;
 //        HERE I AM DEBUGGING THIS ALGORITHM I MADE, ONLY TO DISCOVER IT'S A SOLVED PROBLEM ><
 //        AND IT WASN'T EVEN MY THIS THAT WAS BROKEN, IT WAS THE TEST'
-        return new Random().ints(1, max).distinct().limit(4).toArray();
+//        return new Random().ints(1, max).distinct().limit(4).toArray();
     }
 
 }

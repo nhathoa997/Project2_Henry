@@ -10,6 +10,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.util.ArrayList;
+
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
 @ContextConfiguration("classpath*:applicationContext.xml")
@@ -26,11 +28,11 @@ public class FunSearchTests {
 
     @Test
     public void showMe() {
-        int[] giggle = serv.getFourRando(6);
-        System.out.println(giggle[0]);
-        System.out.println(giggle[1]);
-        System.out.println(giggle[2]);
-        System.out.println(giggle[3]);
+        ArrayList<Integer> giggle = serv.getFourRando(6);
+        System.out.println(giggle.get(0));
+        System.out.println(giggle.get(1));
+        System.out.println(giggle.get(2));
+        System.out.println(giggle.get(3));
     }
 
 }
