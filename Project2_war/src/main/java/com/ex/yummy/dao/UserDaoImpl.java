@@ -1,5 +1,6 @@
 package com.ex.yummy.dao;
 
+import com.ex.yummy.entities.Doop;
 import com.ex.yummy.entities.Users;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -54,18 +55,15 @@ public class UserDaoImpl implements UserDao {
     @Override
     @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ,
     propagation = Propagation.REQUIRES_NEW)
-    public Users getById(int id) throws SQLException {
+    public Users getById(int num) throws SQLException {
+        Session session = this.sessionFactory.openSession();
+        String hql = "From Users where id = :x " ;
 
-        Users new_user = null;
-        String sql = "SELECT * FROM Users WHERE id = " + id;
-//        java.sql.Connection conn = DriverManager.getConnection("jdbc:postgresql://henrydinh.cdrs9lfdhqu1.us-east-2.rds." +
-//                "amazonaws.com:5432/henrydb?user=henry_dinh&password=Henry8354392.");
-//
-//        Statement statement = conn.createStatement();
-//        statement.execute(sql);
-//        Statement statement = Connection.createStatement();
-//        ResultSet resultSet = statement.executeQuery(sql);
-        return null;
+        Query q = session.createQuery(hql);
+        q.setInteger("x", num);
+        Users user = (Users)q.list().get(0);
+        session.close();
+        return user;
     }
 
     @Override

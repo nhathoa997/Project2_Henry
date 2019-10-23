@@ -36,23 +36,11 @@ public class FunSearchDaoImpl implements FunSearchDao {
             propagation = Propagation.REQUIRES_NEW)
     public Doop getDoop(int num){
         Session session = this.sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
-        System.out.println("Hey I was at getDoop 1");
         String hql = "From Doop where id = :x " ;
-        System.out.println("Hey I was at getDoop 2");
 
         Query q = session.createQuery(hql);
         q.setString("x", Integer.toString(num)); //dont ask...(Dark Magic)
-        System.out.println(num);
-        System.out.println("Hey I was at getDoop 4");
-        System.out.println(q.list());
         Doop doop = (Doop)q.list().get(0);
-
-        System.out.println("Hey I was at getDoop 5");
-        System.out.println(doop);
-        System.out.println(doop.getId());
-//        System.out.println(doop.getLink());
-        tx.commit();
         session.close();
         return doop;
 
