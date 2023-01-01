@@ -10,9 +10,9 @@
   "author": "August Duet",
   "license": "ISC",
   "devDependencies": {
-    "file-loader": "^4.2.0",
-    "html-loader": "^0.5.5",
-    "webpack": "^4.41.0",
-    "webpack-cli": "^3.3.9"
+    "file-loader": "^6.2.0",
+    "html-loader": "^4.2.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   }
 }
